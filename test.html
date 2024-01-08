@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Recorrido 360</title>
+</head>
+<body>
+  <script src="./three.js-master/build/three.min.js"></script>
+  <script>
+    // Importar las librerías necesarias
+    import * as THREE from "three";
+
+    // Crear la escena
+    const scene = new THREE.Scene();
+
+    // Crear la cámara
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+    // Crear la luz
+    const light = new THREE.DirectionalLight(0xffffff);
+    light.position.set(0, 100, 0);
+
+    // Crear el objeto persona
+    const person = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 16), new THREE.MeshBasicMaterial({
+      color: 0x0000ff
+    }));
+
+    // Colocar el objeto persona en la escena
+    scene.add(person);
+
+    // Crear el controlador de cámara
+    const trackballControls = new THREE.TrackballControls(camera, scene);
+
+    // Renderizar la escena
+    function render() {
+      requestAnimationFrame(render);
+
+      // Mover la cámara
+      trackballControls.update();
+
+      // Renderizar la escena
+      renderer.render(scene, camera);
+    }
+
+    // Iniciar el renderizado
+    render();
+  </script>
+</body>
+</html>
